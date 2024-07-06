@@ -1,6 +1,6 @@
 import { GUI } from 'dat.gui'
 
-import { Scene } from 'platfuse'
+import { Scene, vec2 } from 'platfuse'
 import CustomLayer from '../layers/custom'
 import Box from '../models/box'
 
@@ -10,11 +10,12 @@ export default class MainScene extends Scene {
 
     async init() {
         await super.init()
-
+        // set grid size (rows, cols) and tile size (in pixels)
+        this.setDimensions(vec2(10, 10), vec2(16, 16))
         this.setScale(3)
         this.addLayer(CustomLayer)
 
-        const logoBox = this.addObject(new Box(this, {}), 1)
+        const logoBox = this.addObject(new Box(this, { pos: this.size.clone().divide(2) }), 1)
         this.camera.toggleBounds(false)
         this.camera.follow(logoBox)
 
@@ -22,11 +23,14 @@ export default class MainScene extends Scene {
 
         // Dat GUI
         this.gui = new GUI()
-        const f1 = this.gui.addFolder('Scene')
         this.gui.add(this.game, 'debug').listen()
+
+        const f1 = this.gui.addFolder('Scene')
+        const f2 = f1.addFolder('Layers')
+
         f1.add(this, 'gravity').step(0.01).min(0.01).max(1)
         f1.add(this.camera, 'scale').step(0.1).min(1).max(10).listen()
-        const f2 = f1.addFolder('Layers')
+
         this.layers
             .sort((a, b) => a.renderOrder - b.renderOrder)
             .map(layer => f2.add(layer, 'visible').name(layer.name || `Layer#${layer.id}`))

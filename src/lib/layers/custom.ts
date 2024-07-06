@@ -1,9 +1,10 @@
-import { Emitter, Layer } from 'platfuse'
+import { Emitter, Layer, vec2 } from 'platfuse'
 import { DefaultParticleSettings } from '../constants'
 
 export default class CustomLayer extends Layer {
     id = 1
     name = 'Custom Layer'
+
     update() {
         const { input } = this.scene.game
         if (input.mouseWasPressed(0)) {
