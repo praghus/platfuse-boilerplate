@@ -4,13 +4,14 @@ const textColor = new Color(255, 255, 255, 1).setAlpha(0.2)
 
 export default class Box extends Entity {
     type = 'Platfuse.Box'
-    image = 'logo.png'
-    size = vec2(4, 4)
-    solid = true
-    mass = 0
+    image = 'logo.png' // image from preloadAssets
+    size = vec2(4, 4) // size of 4 tiles (16x16 pixels each)
+    solid = true // solid object (collides with other objects)
+    mass = 0 // no gravity
 
     update(): void {
-        if (this.isOverlapping(this.scene.getPointerRelativeGridPos(), vec2(1))) {
+        // shake on mouse hover
+        if (this.isOverlapping(this.scene.getPointerRelativeGridPos())) {
             this.scene.camera.shake(100, vec2(0.015))
         }
     }

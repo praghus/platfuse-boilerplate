@@ -1,4 +1,4 @@
-import { Emitter, Layer, vec2 } from 'platfuse'
+import { Emitter, Layer } from 'platfuse'
 import { DefaultParticleSettings } from '../constants'
 
 export default class CustomLayer extends Layer {

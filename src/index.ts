@@ -1,6 +1,6 @@
 import { Game, vec2 } from 'platfuse'
 import logo from './assets/images/logo.png'
-import MainScene from './lib/scenes/main'
+import MainScene from './lib/scenes/main-scene'
 
 import './style.css'
 

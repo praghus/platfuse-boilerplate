@@ -1,7 +1,7 @@
 import { GUI } from 'dat.gui'
 
 import { Scene, vec2 } from 'platfuse'
-import CustomLayer from '../layers/custom'
+import CustomLayer from '../layers/custom-layer'
 import Box from '../models/box'
 
 export default class MainScene extends Scene {
@@ -10,14 +10,15 @@ export default class MainScene extends Scene {
 
     async init() {
         await super.init()
+
         // set grid size (rows, cols) and tile size (in pixels)
         this.setDimensions(vec2(10, 10), vec2(16, 16))
         this.setScale(3)
         this.addLayer(CustomLayer)
 
-        const logoBox = this.addObject(new Box(this, { pos: this.size.clone().divide(2) }), 1)
+        const platfuseBox = this.addObject(new Box(this, { pos: this.size.divide(2) }), 1)
         this.camera.toggleBounds(false)
-        this.camera.follow(logoBox)
+        this.camera.follow(platfuseBox)
 
         console.log('Main Scene initialized', this)
 
