@@ -11,7 +11,7 @@ export default class MainScene extends Scene {
     async init() {
         await super.init()
 
-        this.setScale(2)
+        this.setScale(3)
         this.addLayer(CustomLayer)
 
         const logoBox = this.addObject(new Box(this, {}), 1)
