@@ -5,7 +5,7 @@ import CustomLayer from '../layers/custom-layer'
 import Box from '../models/box'
 
 export default class MainScene extends Scene {
-    gravity = 0.05
+    gravity = 0.02
     gui?: GUI
 
     async init() {
