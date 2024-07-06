@@ -1,7 +1,7 @@
 import { GUI } from 'dat.gui'
 
 import { Scene } from 'platfuse'
-import CustomLayer from '../layers/custom-layer'
+import CustomLayer from '../layers/custom'
 import Box from '../models/box'
 
 export default class MainScene extends Scene {
