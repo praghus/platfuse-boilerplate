@@ -18,6 +18,7 @@ export const DefaultParticleSettings = {
     fadeRate: 0.1,
     randomness: 0.5,
     collideTiles: true,
+    collideObjects: true,
     renderOrder: 1,
     elasticity: 0.5,
     stretchScale: 0.5
