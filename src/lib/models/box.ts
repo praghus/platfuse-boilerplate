@@ -12,7 +12,7 @@ export default class Box extends Entity {
     update(): void {
         // shake on mouse hover
         if (this.isOverlapping(this.scene.getPointerRelativeGridPos())) {
-            this.scene.camera.shake(100, vec2(0.015))
+            this.scene.camera.shake(100, vec2(0.001))
         }
     }
 

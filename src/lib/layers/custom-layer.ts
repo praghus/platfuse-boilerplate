@@ -12,7 +12,7 @@ export default class CustomLayer extends Layer {
                 ...DefaultParticleSettings,
                 pos: this.scene.getPointerRelativeGridPos()
             })
-            this.scene.addObject(emitter)
+            this.scene.addObject(emitter, 1)
         }
     }
 

@@ -31,7 +31,7 @@ export default class MainScene extends Scene {
         f1.add(this.camera, 'scale').step(0.1).min(1).max(10).listen()
 
         this.layers
-            .sort((a, b) => a.renderOrder - b.renderOrder)
+            .sort((a, b) => b.renderOrder - a.renderOrder)
             .map(layer => f2.add(layer, 'visible').name(layer.name || `Layer#${layer.id}`))
     }
 }
