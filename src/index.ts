@@ -1,4 +1,4 @@
-import { Game, vec2 } from 'platfuse'
+import { Game } from 'platfuse'
 import logo from './assets/images/logo.png'
 import MainScene from './lib/scenes/main-scene'
 
@@ -18,8 +18,4 @@ const preloadAssets = {
 
 const game = new Game(config, preloadAssets)
 
-async function start() {
-    await game.start('MainScene')
-}
-
-start()
+await game.start('MainScene')

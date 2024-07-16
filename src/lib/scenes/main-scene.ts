@@ -1,14 +1,16 @@
 import { GUI } from 'dat.gui'
 
-import { Scene, vec2 } from 'platfuse'
+import { Emitter, Scene, vec2 } from 'platfuse'
 import CustomLayer from '../layers/custom-layer'
 import Box from '../models/box'
+import { DefaultParticleSettings } from '../constants'
 
 export default class MainScene extends Scene {
     gui?: GUI
     size = vec2(10, 10) // set grid size (cols, rows)
     tileSize = vec2(16, 16) // and tile size (in pixels)
     gravity = 0.02 // set global gravity value
+    particleSettings = DefaultParticleSettings
 
     init() {
         this.setScale(4)
@@ -31,5 +33,17 @@ export default class MainScene extends Scene {
         this.layers
             .sort((a, b) => b.renderOrder - a.renderOrder)
             .map(layer => f2.add(layer, 'visible').name(layer.name || `Layer#${layer.id}`))
+    }
+
+    update() {
+        const { input } = this.game
+        if (input.mouseWasPressed(0)) {
+            const emitter = new Emitter(this, {
+                ...this.particleSettings,
+                pos: this.getPointerRelativeGridPos()
+            })
+            this.addObject(emitter, 1)
+        }
+        super.update()
     }
 }

@@ -1,13 +1,11 @@
-import { Color, Entity, vec2 } from 'platfuse'
-
-const textColor = new Color(255, 255, 255, 1).setAlpha(0.2)
+import { Entity, vec2 } from 'platfuse'
 
 export default class Box extends Entity {
     type = 'Platfuse.Box'
     image = 'logo.png' // image from preloadAssets
-    size = vec2(4, 4) // size of 4 tiles (16x16 pixels each)
+    size = vec2(4, 4) // size of 4 tiles
     solid = true // solid object (collides with other objects)
-    mass = 0 // no gravity
+    mass = 0 // no gravity for this object
 
     update(): void {
         // shake on mouse hover
@@ -17,10 +15,13 @@ export default class Box extends Entity {
     }
 
     draw() {
+        const { ctx } = this.scene.game
+        ctx.save()
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'
+        ctx.shadowBlur = 6
+        ctx.shadowOffsetX = 6
+        ctx.shadowOffsetY = 6
         super.draw()
-        const { draw, width, height, avgFPS } = this.scene.game
-        draw.text('Wellcome to Platfuse!', width / 2, 50, textColor, '3em', 'center')
-        draw.text('click to create some particles', width / 2, 100, textColor, '1.5em', 'center')
-        draw.text(avgFPS.toFixed(1), width / 2, height - 50, textColor, '2em', 'center')
+        ctx.restore()
     }
 }
