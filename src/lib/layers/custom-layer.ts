@@ -1,6 +1,6 @@
-import { Color, Layer } from 'platfuse'
+import { Color, Layer, vec2 } from 'platfuse'
 
-const textColor = new Color(255, 255, 255, 1).setAlpha(0.2)
+const textColor = new Color(255, 255, 255, 1).setAlpha(0.5)
 
 export default class CustomLayer extends Layer {
     id = 1
@@ -16,9 +16,9 @@ export default class CustomLayer extends Layer {
         ctx.fillStyle = gradient
         ctx.fillRect(0, 0, width, height)
 
-        draw.text('Wellcome to Platfuse!', width / 2, 50, textColor, '3em', 'center')
-        draw.text('click to create some particles', width / 2, 100, textColor, '1.5em', 'center')
-        draw.text(avgFPS.toFixed(1), width / 2, height - 50, textColor, '2em', 'center')
+        draw.text('Wellcome to Platfuse!', vec2(width / 2, 50), textColor, '3em', 'center')
+        draw.text('click to create some particles', vec2(width / 2, 100), textColor, '1.5em', 'center')
+        draw.text(avgFPS.toFixed(1), vec2(width / 2, height - 50), textColor, '2em', 'center')
 
         super.draw()
     }
