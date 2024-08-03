@@ -1,27 +1,15 @@
 import { Entity, vec2 } from 'platfuse'
 
 export default class Box extends Entity {
-    type = 'Platfuse.Box'
-    image = 'logo.png' // image from preloadAssets
-    size = vec2(4, 4) // size of 4 tiles
-    solid = true // solid object (collides with other objects)
-    mass = 0 // no gravity for this object
+    mass = 0 // no gravity applied
+    solid = false // no collision detection
+    collideObjects = false
 
-    update(): void {
-        // shake on mouse hover
+    update() {
+        const { camera } = this.scene
         if (this.isOverlapping(this.scene.getPointerRelativeGridPos())) {
-            this.scene.camera.shake(0.1, vec2(0.001))
+            camera.shake(0.1, vec2(1)) // camera shake on mouse hover
         }
-    }
-
-    draw() {
-        const { ctx } = this.scene.game
-        ctx.save()
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'
-        ctx.shadowBlur = 6
-        ctx.shadowOffsetX = 6
-        ctx.shadowOffsetY = 6
-        super.draw()
-        ctx.restore()
+        camera.follow(this)
     }
 }

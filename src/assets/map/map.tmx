@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="3">
+ <tileset firstgid="1" name="tiles" tilewidth="8" tileheight="8" tilecount="32" columns="32">
+  <image source="../images/tiles.png" width="256" height="8"/>
+ </tileset>
+ <layer id="1" name="Logo" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYCANcOLAyEAWj34RLOrE0DA+dQxobErVkWovAxZ1IMCNA5MKAB5WAr0=
+  </data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="1" type="box" x="32" y="32" width="16" height="16"/>
+ </objectgroup>
+</map>

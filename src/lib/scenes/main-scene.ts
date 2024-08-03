@@ -1,35 +1,33 @@
 import { GUI } from 'dat.gui'
-
-import { Emitter, Scene, vec2 } from 'platfuse'
-import CustomLayer from '../layers/custom-layer'
-import Box from '../models/box'
+import { Emitter, Scene } from 'platfuse'
 import { DefaultParticleSettings } from '../constants'
+import CustomLayer from '../layers/custom-layer'
 
 export default class MainScene extends Scene {
     gui?: GUI
-    size = vec2(10, 10) // set grid size (cols, rows)
-    tileSize = vec2(16, 16) // and tile size (in pixels)
-    gravity = 0.02 // set global gravity value
-    particleSettings = DefaultParticleSettings
+    gravity = 0.02
+    tmxMap = 'map.tmx'
 
     init() {
+        this.initGUI()
         this.setScale(4)
-        this.addLayer(CustomLayer)
-        const platfuseBox = this.addObject(new Box(this), 1)
-        this.camera.toggleBounds(false)
-        this.camera.follow(platfuseBox)
+        this.addLayer(CustomLayer, -1)
+        this.setTileCollisionLayer(1)
+        this.camera.toggleBounds(false) // disable camera bounds
+    }
 
-        console.log('Main Scene initialized', this)
+    // create GUI for debugging
+    initGUI() {
+        if (this.gui instanceof GUI) return
 
-        // Dat GUI
         this.gui = new GUI()
+        this.gui.add(this.game, 'debug').listen()
+
         const f1 = this.gui.addFolder('Scene')
         const f2 = f1.addFolder('Layers')
 
-        this.gui.add(this.game, 'debug').listen()
         f1.add(this, 'gravity').step(0.01).min(0.01).max(1)
-        f1.add(this.camera, 'scale').step(0.1).min(0.1).max(10).listen()
-
+        f1.add(this.camera, 'scale').step(0.1).min(0.1).max(50).listen()
         this.layers
             .sort((a, b) => b.renderOrder - a.renderOrder)
             .map(layer => f2.add(layer, 'visible').name(layer.name || `Layer#${layer.id}`))
@@ -39,10 +37,10 @@ export default class MainScene extends Scene {
         const { input } = this.game
         if (input.mouseWasPressed(0)) {
             const emitter = new Emitter(this, {
-                ...this.particleSettings,
+                ...DefaultParticleSettings,
                 pos: this.getPointerRelativeGridPos()
             })
-            this.addObject(emitter, 1)
+            this.addObject(emitter, 2)
         }
         super.update()
     }
